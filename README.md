@@ -1,8 +1,12 @@
 
 
 
+# ExcelGridView
 
-<video id="video" controls="" preload="none" poster="post.jpeg">
-      <source id="mp4" src="grid.mp4" type="video/mp4">
-      <p>Your user agent does not support the HTML5 Video element.</p>
-    </video>
+类似于Excel的表格视图：
+
+
+<div algin=center>
+    <img src="./post.jpeg" width = "375" height = "667" alt="图片名称" align=center />
+    <img src="./course.jpeg" width = "375" height = "667" alt="图片名称" align=center />
+</div>
