@@ -6,20 +6,309 @@
 	objectVersion = 48;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		1C1148BA2073BDA900C11608 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1148B92073BDA900C11608 /* AppDelegate.m */; };
+		1C1148BD2073BDA900C11608 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1148BC2073BDA900C11608 /* ViewController.m */; };
+		1C1148C02073BDA900C11608 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C1148BE2073BDA900C11608 /* Main.storyboard */; };
+		1C1148C22073BDA900C11608 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1C1148C12073BDA900C11608 /* Assets.xcassets */; };
+		1C1148C52073BDA900C11608 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C1148C32073BDA900C11608 /* LaunchScreen.storyboard */; };
+		1C1148C82073BDA900C11608 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1148C72073BDA900C11608 /* main.m */; };
+		1C1148D52073BDC000C11608 /* GridView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C1148D32073BDC000C11608 /* GridView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1C1148D82073BDC000C11608 /* GridView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C1148D12073BDC000C11608 /* GridView.framework */; };
+		1C1148D92073BDC000C11608 /* GridView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1C1148D12073BDC000C11608 /* GridView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1C1148E32073BE6B00C11608 /* Test01ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1148E22073BE6B00C11608 /* Test01ViewController.m */; };
+		1C1148EC2073BE9300C11608 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1148E52073BE9200C11608 /* Tools.m */; };
+		1C1148ED2073BE9300C11608 /* CourseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1148E72073BE9200C11608 /* CourseModel.m */; };
+		1C1148EE2073BE9300C11608 /* CourseCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1148E82073BE9200C11608 /* CourseCollectionViewCell.m */; };
+		1C1148EF2073BE9300C11608 /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1148E92073BE9200C11608 /* NSDate+Helper.m */; };
+		1C1148F32073C00100C11608 /* Test02ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1148F22073C00100C11608 /* Test02ViewController.m */; };
+		1C1148F62073C33800C11608 /* ExcelGridView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C1148F42073C33700C11608 /* ExcelGridView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1C1148F72073C33800C11608 /* ExcelGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1148F52073C33700C11608 /* ExcelGridView.m */; };
+		1C1148FA2073C35200C11608 /* ExcelGridFrame.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C1148F82073C35200C11608 /* ExcelGridFrame.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1C1148FB2073C35200C11608 /* ExcelGridFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1148F92073C35200C11608 /* ExcelGridFrame.m */; };
+		1C1148FE2073C37D00C11608 /* ExcelGridItemCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C1148FC2073C37D00C11608 /* ExcelGridItemCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1C1148FF2073C37D00C11608 /* ExcelGridItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1148FD2073C37D00C11608 /* ExcelGridItemCell.m */; };
+		1C1149042073C3AA00C11608 /* UIView+__ExcelGrid.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C1149022073C3AA00C11608 /* UIView+__ExcelGrid.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		1C1149052073C3AA00C11608 /* UIView+__ExcelGrid.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1149032073C3AA00C11608 /* UIView+__ExcelGrid.m */; };
+		1C22B502207475A200CA0407 /* Test03ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C22B501207475A200CA0407 /* Test03ViewController.m */; };
+		1C22B5052074AF5300CA0407 /* UIColor+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C22B5042074AF5300CA0407 /* UIColor+Helper.m */; };
+		1C22B5092074B36400CA0407 /* Test04ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C22B5082074B36400CA0407 /* Test04ViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1C1148D62073BDC000C11608 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1C1148AB2073BD8B00C11608 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1C1148D02073BDC000C11608;
+			remoteInfo = GridView;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1C1148DD2073BDC000C11608 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1C1148D92073BDC000C11608 /* GridView.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		1C1148B52073BDA900C11608 /* GridDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GridDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C1148B82073BDA900C11608 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		1C1148B92073BDA900C11608 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		1C1148BB2073BDA900C11608 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		1C1148BC2073BDA900C11608 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		1C1148BF2073BDA900C11608 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		1C1148C12073BDA900C11608 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1C1148C42073BDA900C11608 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		1C1148C62073BDA900C11608 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1C1148C72073BDA900C11608 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		1C1148D12073BDC000C11608 /* GridView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GridView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C1148D32073BDC000C11608 /* GridView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GridView.h; sourceTree = "<group>"; };
+		1C1148D42073BDC000C11608 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1C1148E12073BE6B00C11608 /* Test01ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Test01ViewController.h; sourceTree = "<group>"; };
+		1C1148E22073BE6B00C11608 /* Test01ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Test01ViewController.m; sourceTree = "<group>"; };
+		1C1148E42073BE9100C11608 /* NSDate+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Helper.h"; sourceTree = "<group>"; };
+		1C1148E52073BE9200C11608 /* Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
+		1C1148E62073BE9200C11608 /* CourseCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseCollectionViewCell.h; sourceTree = "<group>"; };
+		1C1148E72073BE9200C11608 /* CourseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseModel.m; sourceTree = "<group>"; };
+		1C1148E82073BE9200C11608 /* CourseCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseCollectionViewCell.m; sourceTree = "<group>"; };
+		1C1148E92073BE9200C11608 /* NSDate+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Helper.m"; sourceTree = "<group>"; };
+		1C1148EA2073BE9200C11608 /* CourseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseModel.h; sourceTree = "<group>"; };
+		1C1148EB2073BE9200C11608 /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
+		1C1148F12073C00100C11608 /* Test02ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Test02ViewController.h; sourceTree = "<group>"; };
+		1C1148F22073C00100C11608 /* Test02ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Test02ViewController.m; sourceTree = "<group>"; };
+		1C1148F42073C33700C11608 /* ExcelGridView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExcelGridView.h; sourceTree = "<group>"; };
+		1C1148F52073C33700C11608 /* ExcelGridView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExcelGridView.m; sourceTree = "<group>"; };
+		1C1148F82073C35200C11608 /* ExcelGridFrame.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExcelGridFrame.h; sourceTree = "<group>"; };
+		1C1148F92073C35200C11608 /* ExcelGridFrame.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExcelGridFrame.m; sourceTree = "<group>"; };
+		1C1148FC2073C37D00C11608 /* ExcelGridItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExcelGridItemCell.h; sourceTree = "<group>"; };
+		1C1148FD2073C37D00C11608 /* ExcelGridItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExcelGridItemCell.m; sourceTree = "<group>"; };
+		1C1149022073C3AA00C11608 /* UIView+__ExcelGrid.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+__ExcelGrid.h"; sourceTree = "<group>"; };
+		1C1149032073C3AA00C11608 /* UIView+__ExcelGrid.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+__ExcelGrid.m"; sourceTree = "<group>"; };
+		1C22B500207475A200CA0407 /* Test03ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Test03ViewController.h; sourceTree = "<group>"; };
+		1C22B501207475A200CA0407 /* Test03ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Test03ViewController.m; sourceTree = "<group>"; };
+		1C22B5032074AF5300CA0407 /* UIColor+Helper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+Helper.h"; sourceTree = "<group>"; };
+		1C22B5042074AF5300CA0407 /* UIColor+Helper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Helper.m"; sourceTree = "<group>"; };
+		1C22B5072074B36400CA0407 /* Test04ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Test04ViewController.h; sourceTree = "<group>"; };
+		1C22B5082074B36400CA0407 /* Test04ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Test04ViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1C1148B22073BDA900C11608 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1C1148D82073BDC000C11608 /* GridView.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1C1148CD2073BDC000C11608 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
 /* Begin PBXGroup section */
 		1C1148AA2073BD8B00C11608 = {
 			isa = PBXGroup;
 			children = (
+				1C1148B72073BDA900C11608 /* GridDemo */,
+				1C1148D22073BDC000C11608 /* GridView */,
+				1C1148B62073BDA900C11608 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
+		1C1148B62073BDA900C11608 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1C1148B52073BDA900C11608 /* GridDemo.app */,
+				1C1148D12073BDC000C11608 /* GridView.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1C1148B72073BDA900C11608 /* GridDemo */ = {
+			isa = PBXGroup;
+			children = (
+				1C1148B82073BDA900C11608 /* AppDelegate.h */,
+				1C1148B92073BDA900C11608 /* AppDelegate.m */,
+				1C1148BB2073BDA900C11608 /* ViewController.h */,
+				1C1148BC2073BDA900C11608 /* ViewController.m */,
+				1C1148E02073BE5300C11608 /* Public */,
+				1C1148DE2073BE3700C11608 /* Tests */,
+				1C1148BE2073BDA900C11608 /* Main.storyboard */,
+				1C1148C12073BDA900C11608 /* Assets.xcassets */,
+				1C1148C32073BDA900C11608 /* LaunchScreen.storyboard */,
+				1C1148C62073BDA900C11608 /* Info.plist */,
+				1C1148C72073BDA900C11608 /* main.m */,
+			);
+			path = GridDemo;
+			sourceTree = "<group>";
+		};
+		1C1148D22073BDC000C11608 /* GridView */ = {
+			isa = PBXGroup;
+			children = (
+				1C1148D32073BDC000C11608 /* GridView.h */,
+				1C1148F82073C35200C11608 /* ExcelGridFrame.h */,
+				1C1148F92073C35200C11608 /* ExcelGridFrame.m */,
+				1C1148F42073C33700C11608 /* ExcelGridView.h */,
+				1C1148F52073C33700C11608 /* ExcelGridView.m */,
+				1C1148FC2073C37D00C11608 /* ExcelGridItemCell.h */,
+				1C1148FD2073C37D00C11608 /* ExcelGridItemCell.m */,
+				1C1149022073C3AA00C11608 /* UIView+__ExcelGrid.h */,
+				1C1149032073C3AA00C11608 /* UIView+__ExcelGrid.m */,
+				1C1148D42073BDC000C11608 /* Info.plist */,
+			);
+			path = GridView;
+			sourceTree = "<group>";
+		};
+		1C1148DE2073BE3700C11608 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				1C22B5062074B35600CA0407 /* Test04 */,
+				1C22B4FF2074758E00CA0407 /* Test03 */,
+				1C1148F02073BFF000C11608 /* Test02 */,
+				1C1148DF2073BE4000C11608 /* Test01 */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		1C1148DF2073BE4000C11608 /* Test01 */ = {
+			isa = PBXGroup;
+			children = (
+				1C1148E12073BE6B00C11608 /* Test01ViewController.h */,
+				1C1148E22073BE6B00C11608 /* Test01ViewController.m */,
+			);
+			path = Test01;
+			sourceTree = "<group>";
+		};
+		1C1148E02073BE5300C11608 /* Public */ = {
+			isa = PBXGroup;
+			children = (
+				1C1148E62073BE9200C11608 /* CourseCollectionViewCell.h */,
+				1C1148E82073BE9200C11608 /* CourseCollectionViewCell.m */,
+				1C1148EA2073BE9200C11608 /* CourseModel.h */,
+				1C1148E72073BE9200C11608 /* CourseModel.m */,
+				1C1148E42073BE9100C11608 /* NSDate+Helper.h */,
+				1C1148E92073BE9200C11608 /* NSDate+Helper.m */,
+				1C1148EB2073BE9200C11608 /* Tools.h */,
+				1C1148E52073BE9200C11608 /* Tools.m */,
+				1C22B5032074AF5300CA0407 /* UIColor+Helper.h */,
+				1C22B5042074AF5300CA0407 /* UIColor+Helper.m */,
+			);
+			path = Public;
+			sourceTree = "<group>";
+		};
+		1C1148F02073BFF000C11608 /* Test02 */ = {
+			isa = PBXGroup;
+			children = (
+				1C1148F12073C00100C11608 /* Test02ViewController.h */,
+				1C1148F22073C00100C11608 /* Test02ViewController.m */,
+			);
+			path = Test02;
+			sourceTree = "<group>";
+		};
+		1C22B4FF2074758E00CA0407 /* Test03 */ = {
+			isa = PBXGroup;
+			children = (
+				1C22B500207475A200CA0407 /* Test03ViewController.h */,
+				1C22B501207475A200CA0407 /* Test03ViewController.m */,
+			);
+			path = Test03;
+			sourceTree = "<group>";
+		};
+		1C22B5062074B35600CA0407 /* Test04 */ = {
+			isa = PBXGroup;
+			children = (
+				1C22B5072074B36400CA0407 /* Test04ViewController.h */,
+				1C22B5082074B36400CA0407 /* Test04ViewController.m */,
+			);
+			path = Test04;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		1C1148CE2073BDC000C11608 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1C1148FA2073C35200C11608 /* ExcelGridFrame.h in Headers */,
+				1C1148D52073BDC000C11608 /* GridView.h in Headers */,
+				1C1148F62073C33800C11608 /* ExcelGridView.h in Headers */,
+				1C1148FE2073C37D00C11608 /* ExcelGridItemCell.h in Headers */,
+				1C1149042073C3AA00C11608 /* UIView+__ExcelGrid.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		1C1148B42073BDA900C11608 /* GridDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1C1148C92073BDA900C11608 /* Build configuration list for PBXNativeTarget "GridDemo" */;
+			buildPhases = (
+				1C1148B12073BDA900C11608 /* Sources */,
+				1C1148B22073BDA900C11608 /* Frameworks */,
+				1C1148B32073BDA900C11608 /* Resources */,
+				1C1148DD2073BDC000C11608 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1C1148D72073BDC000C11608 /* PBXTargetDependency */,
+			);
+			name = GridDemo;
+			productName = GridDemo;
+			productReference = 1C1148B52073BDA900C11608 /* GridDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		1C1148D02073BDC000C11608 /* GridView */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1C1148DA2073BDC000C11608 /* Build configuration list for PBXNativeTarget "GridView" */;
+			buildPhases = (
+				1C1148CC2073BDC000C11608 /* Sources */,
+				1C1148CD2073BDC000C11608 /* Frameworks */,
+				1C1148CE2073BDC000C11608 /* Headers */,
+				1C1148CF2073BDC000C11608 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GridView;
+			productName = GridView;
+			productReference = 1C1148D12073BDC000C11608 /* GridView.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		1C1148AB2073BD8B00C11608 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0920;
+				TargetAttributes = {
+					1C1148B42073BDA900C11608 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Manual;
+					};
+					1C1148D02073BDC000C11608 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+				};
 			};
 			buildConfigurationList = 1C1148AE2073BD8B00C11608 /* Build configuration list for PBXProject "Grid" */;
 			compatibilityVersion = "Xcode 8.0";
@@ -27,14 +316,98 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 1C1148AA2073BD8B00C11608;
+			productRefGroup = 1C1148B62073BDA900C11608 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				1C1148B42073BDA900C11608 /* GridDemo */,
+				1C1148D02073BDC000C11608 /* GridView */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1C1148B32073BDA900C11608 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1C1148C52073BDA900C11608 /* LaunchScreen.storyboard in Resources */,
+				1C1148C22073BDA900C11608 /* Assets.xcassets in Resources */,
+				1C1148C02073BDA900C11608 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1C1148CF2073BDC000C11608 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1C1148B12073BDA900C11608 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1C1148BD2073BDA900C11608 /* ViewController.m in Sources */,
+				1C1148EC2073BE9300C11608 /* Tools.m in Sources */,
+				1C1148ED2073BE9300C11608 /* CourseModel.m in Sources */,
+				1C1148E32073BE6B00C11608 /* Test01ViewController.m in Sources */,
+				1C22B5052074AF5300CA0407 /* UIColor+Helper.m in Sources */,
+				1C1148EF2073BE9300C11608 /* NSDate+Helper.m in Sources */,
+				1C1148F32073C00100C11608 /* Test02ViewController.m in Sources */,
+				1C1148EE2073BE9300C11608 /* CourseCollectionViewCell.m in Sources */,
+				1C22B5092074B36400CA0407 /* Test04ViewController.m in Sources */,
+				1C22B502207475A200CA0407 /* Test03ViewController.m in Sources */,
+				1C1148C82073BDA900C11608 /* main.m in Sources */,
+				1C1148BA2073BDA900C11608 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1C1148CC2073BDC000C11608 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1C1149052073C3AA00C11608 /* UIView+__ExcelGrid.m in Sources */,
+				1C1148F72073C33800C11608 /* ExcelGridView.m in Sources */,
+				1C1148FF2073C37D00C11608 /* ExcelGridItemCell.m in Sources */,
+				1C1148FB2073C35200C11608 /* ExcelGridFrame.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1C1148D72073BDC000C11608 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1C1148D02073BDC000C11608 /* GridView */;
+			targetProxy = 1C1148D62073BDC000C11608 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		1C1148BE2073BDA900C11608 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1C1148BF2073BDA900C11608 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		1C1148C32073BDA900C11608 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1C1148C42073BDA900C11608 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		1C1148AF2073BD8B00C11608 /* Debug */ = {
@@ -49,6 +422,263 @@
 			};
 			name = Release;
 		};
+		1C1148CA2073BDA900C11608 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = NFE8L9VTV6;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = GridDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jyhu.GridDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "35cce438-3c9a-4123-a310-ceec4c8c52c4";
+				PROVISIONING_PROFILE_SPECIFIER = "hujinyou-mbp-dev-all-170329";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1C1148CB2073BDA900C11608 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = GridDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jyhu.GridDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1C1148DB2073BDC000C11608 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = GridView/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jyhu.GridView;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		1C1148DC2073BDC000C11608 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = GridView/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jyhu.GridView;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -57,6 +687,24 @@
 			buildConfigurations = (
 				1C1148AF2073BD8B00C11608 /* Debug */,
 				1C1148B02073BD8B00C11608 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1C1148C92073BDA900C11608 /* Build configuration list for PBXNativeTarget "GridDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1C1148CA2073BDA900C11608 /* Debug */,
+				1C1148CB2073BDA900C11608 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1C1148DA2073BDC000C11608 /* Build configuration list for PBXNativeTarget "GridView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1C1148DB2073BDC000C11608 /* Debug */,
+				1C1148DC2073BDC000C11608 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
