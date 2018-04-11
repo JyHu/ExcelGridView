@@ -5,8 +5,8 @@
 //  Created by 胡金友 on 2018/4/4.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseTestViewController.h"
 
-@interface Test03ViewController : UIViewController
+@interface Test03ViewController : BaseTestViewController
 
 @end

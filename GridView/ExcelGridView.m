@@ -36,7 +36,7 @@ UICollectionViewDelegateFlowLayout
 /**
  03 纵向的标题视图，必须是UIScrollView或者其子类，可用于实现内容视图滚动时的联动
  */
-@property (nonatomic, strong) UITableView *grid_verticalHeaderScrollView;
+@property (nonatomic, strong) UITableView *grid_verticalHeaderTableView;
 
 /**
  04 展示的内容视图，必须是UIScrollView或者其子类，用于展示可滚动的多行列内容
@@ -61,7 +61,7 @@ UICollectionViewDelegateFlowLayout
 }
 
 - (void)initialize {
-    self.verticalHeaderScrollView = self.grid_verticalHeaderScrollView;
+    self.verticalHeaderTableView = self.grid_verticalHeaderTableView;
     self.gridFrameDelegate = self;
     
     _rowHeight = 44;
@@ -71,8 +71,8 @@ UICollectionViewDelegateFlowLayout
 }
 
 - (void)reloadData {
-    if (self.grid_verticalHeaderScrollView) {
-        [self.grid_verticalHeaderScrollView reloadData];
+    if (self.grid_verticalHeaderTableView) {
+        [self.grid_verticalHeaderTableView reloadData];
     }
     if (self.grid_contentScrollView) {
         if ([self.grid_contentScrollView isKindOfClass:[UITableView class]]) {
@@ -85,6 +85,18 @@ UICollectionViewDelegateFlowLayout
     
     if (self.grid_horizontalHeaderScrollView && [self.grid_horizontalHeaderScrollView isKindOfClass:[UICollectionView class]]) {
         [(UICollectionView *)self.grid_horizontalHeaderScrollView reloadData];
+    }
+}
+
+- (void)registerClass:(Class)cls forCellInContentCollectionWithReuseIdentifier:(NSString *)identifier {
+    if (self.grid_contentScrollView && [self.grid_contentScrollView isKindOfClass:[UICollectionView class]]) {
+        [(UICollectionView *)self.grid_contentScrollView registerClass:cls forCellWithReuseIdentifier:identifier];
+    }
+}
+
+- (void)registerClass:(Class)cls forCellInHoriHeaderCollectionWithReuseIdentifier:(NSString *)identifier {
+    if (self.grid_horizontalHeaderScrollView && [self.grid_horizontalHeaderScrollView isKindOfClass:[UICollectionView class]]) {
+        [(UICollectionView *)self.grid_horizontalHeaderScrollView registerClass:cls forCellWithReuseIdentifier:identifier];
     }
 }
 
@@ -142,7 +154,7 @@ UICollectionViewDelegateFlowLayout
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.delegate) {
-        if ([tableView isEqual:self.grid_verticalHeaderScrollView]) {
+        if ([tableView isEqual:self.grid_verticalHeaderTableView]) {
             if ([self.delegate respondsToSelector:@selector(gridView:verticalHeaderCell:atIndexPath:)]) {
                 static NSString *reusefulDefaultTitleIdentifier = @"auu.grid.reusefulDefaultTitleIdentifier";
                 UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reusefulDefaultTitleIdentifier];
@@ -154,21 +166,21 @@ UICollectionViewDelegateFlowLayout
                 return cell;
             }
             
-            if ([self.delegate respondsToSelector:@selector(gridView:titleCellOfVerticalHeaderAtIndexPath:)]) {
-                return [self.delegate gridView:self titleCellOfVerticalHeaderAtIndexPath:indexPath];
+            if ([self.delegate respondsToSelector:@selector(gridView:cellForVerticalHeaderAtIndexPath:)]) {
+                return [self.delegate gridView:self cellForVerticalHeaderAtIndexPath:indexPath];
             }
             
             NSAssert2(0, @"纵向标题的设置必须实现`%@`和`%@`方法之一",
                       NSStringFromSelector(@selector(gridView:verticalHeaderCell:atIndexPath:)),
-                      NSStringFromSelector(@selector(gridView:titleCellOfVerticalHeaderAtIndexPath:)));
+                      NSStringFromSelector(@selector(gridView:cellForVerticalHeaderAtIndexPath:)));
             
         } else if ([tableView isEqual:self.grid_contentScrollView]) {
             
-            NSAssert1([self.delegate respondsToSelector:@selector(gridView:contentCellAtIndexPath:)],
+            NSAssert1([self.delegate respondsToSelector:@selector(gridView:cellForContentAtIndexPath:)],
                       @"ExcelGridVisualTypeTableView类型的内容视图，必须实现`%@`方法",
-                      NSStringFromSelector(@selector(gridView:contentCellAtIndexPath:)));
+                      NSStringFromSelector(@selector(gridView:cellForContentAtIndexPath:)));
             
-            return [self.delegate gridView:self contentCellAtIndexPath:indexPath];
+            return [self.delegate gridView:self cellForContentAtIndexPath:indexPath];
         }
     }
     
@@ -193,6 +205,10 @@ UICollectionViewDelegateFlowLayout
     }
     
     return self.groupHeaderHeight;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - collection view delegate datasource
@@ -243,13 +259,13 @@ UICollectionViewDelegateFlowLayout
                 return cell;
             }
             
-            if ([self.delegate respondsToSelector:@selector(gridView:contentItemCellAtIndexPath:)]) {
-                return [self.delegate gridView:self contentItemCellAtIndexPath:indexPath];
+            if ([self.delegate respondsToSelector:@selector(gridView:cellForContentItemAtIndexPath:)]) {
+                return [self.delegate gridView:self cellForContentItemAtIndexPath:indexPath];
             }
             
             NSAssert2(0, @"Collection类型的内容区必须实现`%@`与`%@`两个代理方法中的其中一个",
                       NSStringFromSelector(@selector(gridView:contentItemCell:atIndexPath:)),
-                      NSStringFromSelector(@selector(gridView:contentItemCellAtIndexPath:)));
+                      NSStringFromSelector(@selector(gridView:cellForContentItemAtIndexPath:)));
             
             return nil;
         } else {
@@ -334,6 +350,7 @@ UICollectionViewDelegateFlowLayout
         return CGSizeMake(collectionView.grid_width, headerHeight);
     }
     
+    // 横标题不需要分组高度，否则标题内容会往右偏移
     return CGSizeZero;
 }
 
@@ -388,22 +405,22 @@ UICollectionViewDelegateFlowLayout
     self.contentScrollView = self.grid_contentScrollView;
 }
 
-- (UITableView *)grid_verticalHeaderScrollView {
-    if (!_grid_verticalHeaderScrollView) {
-        _grid_verticalHeaderScrollView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
-        _grid_verticalHeaderScrollView.dataSource = self;
-        _grid_verticalHeaderScrollView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kGRID_DOUBLE_ZERO, kGRID_DOUBLE_ZERO)];
-        _grid_verticalHeaderScrollView.backgroundColor = [UIColor clearColor];
-        _grid_verticalHeaderScrollView.sectionHeaderHeight = 0;
-        _grid_verticalHeaderScrollView.sectionFooterHeight = 0;
-        _grid_verticalHeaderScrollView.rowHeight = 0;
-        _grid_verticalHeaderScrollView.estimatedRowHeight = 0;
-        _grid_verticalHeaderScrollView.estimatedSectionFooterHeight = 0;
-        _grid_verticalHeaderScrollView.estimatedSectionHeaderHeight = 0;
-        _grid_verticalHeaderScrollView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        [_grid_verticalHeaderScrollView reloadData];
+- (UITableView *)grid_verticalHeaderTableView {
+    if (!_grid_verticalHeaderTableView) {
+        _grid_verticalHeaderTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        _grid_verticalHeaderTableView.dataSource = self;
+        _grid_verticalHeaderTableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kGRID_DOUBLE_ZERO, kGRID_DOUBLE_ZERO)];
+        _grid_verticalHeaderTableView.backgroundColor = [UIColor clearColor];
+        _grid_verticalHeaderTableView.sectionHeaderHeight = 0;
+        _grid_verticalHeaderTableView.sectionFooterHeight = 0;
+        _grid_verticalHeaderTableView.rowHeight = 0;
+        _grid_verticalHeaderTableView.estimatedRowHeight = 0;
+        _grid_verticalHeaderTableView.estimatedSectionFooterHeight = 0;
+        _grid_verticalHeaderTableView.estimatedSectionHeaderHeight = 0;
+        _grid_verticalHeaderTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [_grid_verticalHeaderTableView reloadData];
     }
-    return _grid_verticalHeaderScrollView;
+    return _grid_verticalHeaderTableView;
 }
 
 - (void)setHorizontalHeaderType:(ExcelGridHorizontalHeaderType)horizontalHeaderType {

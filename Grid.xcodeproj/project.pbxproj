@@ -33,6 +33,11 @@
 		1C22B502207475A200CA0407 /* Test03ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C22B501207475A200CA0407 /* Test03ViewController.m */; };
 		1C22B5052074AF5300CA0407 /* UIColor+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C22B5042074AF5300CA0407 /* UIColor+Helper.m */; };
 		1C22B5092074B36400CA0407 /* Test04ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C22B5082074B36400CA0407 /* Test04ViewController.m */; };
+		1C936E5C207DCA6F00CD0466 /* TestVertHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C936E5B207DCA6F00CD0466 /* TestVertHeaderTableViewCell.m */; };
+		1C936E5F207DCA9E00CD0466 /* TestHoriHeaderCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C936E5E207DCA9E00CD0466 /* TestHoriHeaderCollectionViewCell.m */; };
+		1C936E62207DDA0000CD0466 /* TestContentItemCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C936E61207DDA0000CD0466 /* TestContentItemCollectionViewCell.m */; };
+		1C936E65207DE1CF00CD0466 /* BaseTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C936E64207DE1CF00CD0466 /* BaseTestViewController.m */; };
+		A6E2787E825DB611773FEE76 /* Pods_GridDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42455E70D8FE8378EA03FF18 /* Pods_GridDemo.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +104,17 @@
 		1C22B5042074AF5300CA0407 /* UIColor+Helper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Helper.m"; sourceTree = "<group>"; };
 		1C22B5072074B36400CA0407 /* Test04ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Test04ViewController.h; sourceTree = "<group>"; };
 		1C22B5082074B36400CA0407 /* Test04ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Test04ViewController.m; sourceTree = "<group>"; };
+		1C936E5A207DCA6F00CD0466 /* TestVertHeaderTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestVertHeaderTableViewCell.h; sourceTree = "<group>"; };
+		1C936E5B207DCA6F00CD0466 /* TestVertHeaderTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestVertHeaderTableViewCell.m; sourceTree = "<group>"; };
+		1C936E5D207DCA9E00CD0466 /* TestHoriHeaderCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestHoriHeaderCollectionViewCell.h; sourceTree = "<group>"; };
+		1C936E5E207DCA9E00CD0466 /* TestHoriHeaderCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestHoriHeaderCollectionViewCell.m; sourceTree = "<group>"; };
+		1C936E60207DDA0000CD0466 /* TestContentItemCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestContentItemCollectionViewCell.h; sourceTree = "<group>"; };
+		1C936E61207DDA0000CD0466 /* TestContentItemCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestContentItemCollectionViewCell.m; sourceTree = "<group>"; };
+		1C936E63207DE1CF00CD0466 /* BaseTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseTestViewController.h; sourceTree = "<group>"; };
+		1C936E64207DE1CF00CD0466 /* BaseTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseTestViewController.m; sourceTree = "<group>"; };
+		42455E70D8FE8378EA03FF18 /* Pods_GridDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GridDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		90934833E0C9F6B0D15F32C0 /* Pods-GridDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GridDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-GridDemo/Pods-GridDemo.release.xcconfig"; sourceTree = "<group>"; };
+		B3962AC3EFDB6B8E97DF388A /* Pods-GridDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GridDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GridDemo/Pods-GridDemo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +123,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C1148D82073BDC000C11608 /* GridView.framework in Frameworks */,
+				A6E2787E825DB611773FEE76 /* Pods_GridDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,6 +143,8 @@
 				1C1148B72073BDA900C11608 /* GridDemo */,
 				1C1148D22073BDC000C11608 /* GridView */,
 				1C1148B62073BDA900C11608 /* Products */,
+				4A6ACFF3DFA435BC87DF9B94 /* Pods */,
+				B8471BA8449E993DD8C16AC8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -180,6 +199,8 @@
 				1C22B4FF2074758E00CA0407 /* Test03 */,
 				1C1148F02073BFF000C11608 /* Test02 */,
 				1C1148DF2073BE4000C11608 /* Test01 */,
+				1C936E63207DE1CF00CD0466 /* BaseTestViewController.h */,
+				1C936E64207DE1CF00CD0466 /* BaseTestViewController.m */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -233,8 +254,31 @@
 			children = (
 				1C22B5072074B36400CA0407 /* Test04ViewController.h */,
 				1C22B5082074B36400CA0407 /* Test04ViewController.m */,
+				1C936E5A207DCA6F00CD0466 /* TestVertHeaderTableViewCell.h */,
+				1C936E5B207DCA6F00CD0466 /* TestVertHeaderTableViewCell.m */,
+				1C936E5D207DCA9E00CD0466 /* TestHoriHeaderCollectionViewCell.h */,
+				1C936E5E207DCA9E00CD0466 /* TestHoriHeaderCollectionViewCell.m */,
+				1C936E60207DDA0000CD0466 /* TestContentItemCollectionViewCell.h */,
+				1C936E61207DDA0000CD0466 /* TestContentItemCollectionViewCell.m */,
 			);
 			path = Test04;
+			sourceTree = "<group>";
+		};
+		4A6ACFF3DFA435BC87DF9B94 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B3962AC3EFDB6B8E97DF388A /* Pods-GridDemo.debug.xcconfig */,
+				90934833E0C9F6B0D15F32C0 /* Pods-GridDemo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		B8471BA8449E993DD8C16AC8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				42455E70D8FE8378EA03FF18 /* Pods_GridDemo.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,10 +303,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1C1148C92073BDA900C11608 /* Build configuration list for PBXNativeTarget "GridDemo" */;
 			buildPhases = (
+				F8B3818155F1234B9F5541D3 /* [CP] Check Pods Manifest.lock */,
 				1C1148B12073BDA900C11608 /* Sources */,
 				1C1148B22073BDA900C11608 /* Frameworks */,
 				1C1148B32073BDA900C11608 /* Resources */,
 				1C1148DD2073BDC000C11608 /* Embed Frameworks */,
+				2049296D43C792BB63D75AD0 /* [CP] Embed Pods Frameworks */,
+				1627F143455D77CA56F2D176 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -349,12 +396,67 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1627F143455D77CA56F2D176 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GridDemo/Pods-GridDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2049296D43C792BB63D75AD0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-GridDemo/Pods-GridDemo-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GridDemo/Pods-GridDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F8B3818155F1234B9F5541D3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GridDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1C1148B12073BDA900C11608 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				1C1148BD2073BDA900C11608 /* ViewController.m in Sources */,
+				1C936E5C207DCA6F00CD0466 /* TestVertHeaderTableViewCell.m in Sources */,
 				1C1148EC2073BE9300C11608 /* Tools.m in Sources */,
 				1C1148ED2073BE9300C11608 /* CourseModel.m in Sources */,
 				1C1148E32073BE6B00C11608 /* Test01ViewController.m in Sources */,
@@ -362,10 +464,13 @@
 				1C1148EF2073BE9300C11608 /* NSDate+Helper.m in Sources */,
 				1C1148F32073C00100C11608 /* Test02ViewController.m in Sources */,
 				1C1148EE2073BE9300C11608 /* CourseCollectionViewCell.m in Sources */,
+				1C936E5F207DCA9E00CD0466 /* TestHoriHeaderCollectionViewCell.m in Sources */,
 				1C22B5092074B36400CA0407 /* Test04ViewController.m in Sources */,
 				1C22B502207475A200CA0407 /* Test03ViewController.m in Sources */,
 				1C1148C82073BDA900C11608 /* main.m in Sources */,
+				1C936E65207DE1CF00CD0466 /* BaseTestViewController.m in Sources */,
 				1C1148BA2073BDA900C11608 /* AppDelegate.m in Sources */,
+				1C936E62207DDA0000CD0466 /* TestContentItemCollectionViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,6 +529,7 @@
 		};
 		1C1148CA2073BDA900C11608 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B3962AC3EFDB6B8E97DF388A /* Pods-GridDemo.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -489,6 +595,7 @@
 		};
 		1C1148CB2073BDA900C11608 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 90934833E0C9F6B0D15F32C0 /* Pods-GridDemo.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

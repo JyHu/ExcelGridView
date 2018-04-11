@@ -28,10 +28,6 @@ typedef NS_ENUM(NSUInteger, ExcelGridHorizontalHeaderType) {
 
 #pragma mark - 横向标题设置的代理方法
 
-// 横向标题的类型
-- (ExcelGridHorizontalHeaderType)horizontalHeaderTypeOfGridView:(ExcelGridView *)gridView;
-// ExcelGridHorizontalHeaderTypeManual 类型对应的代理，需要返回一个UIScrollView或其子类视图
-- (UIScrollView *)horizontalHeaderOfGridView:(ExcelGridView *)gridView;
 // ExcelGridHorizontalHeaderTypeCustomerCell 类型对应的代理，需要返回一个 UICollectionViewCell
 - (UICollectionViewCell *)gridView:(ExcelGridView *)gridView cellForHorizontalHeaderAtIndex:(NSInteger)index;
 // ExcelGridHorizontalHeaderTypeCustomerView 类型对应的代理，需要返回一个 UIView类型的组件，放在ScrollView容器内
@@ -45,7 +41,7 @@ typedef NS_ENUM(NSUInteger, ExcelGridHorizontalHeaderType) {
 // 设置纵向标题
 - (void)gridView:(ExcelGridView *)girdView verticalHeaderCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 // 返回自定义的cell
-- (UITableViewCell *)gridView:(ExcelGridView *)gridView titleCellOfVerticalHeaderAtIndexPath:(NSIndexPath *)indexPath;
+- (UITableViewCell *)gridView:(ExcelGridView *)gridView cellForVerticalHeaderAtIndexPath:(NSIndexPath *)indexPath;
 
 
 #pragma mark - 设置内容区
@@ -53,10 +49,10 @@ typedef NS_ENUM(NSUInteger, ExcelGridHorizontalHeaderType) {
 // 内容的区的item，使用与CollectionView
 - (void)gridView:(ExcelGridView *)girdView contentItemCell:(ExcelGridItemCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 // 内容区的cell，collectionview类型
-- (UICollectionViewCell *)gridView:(ExcelGridView *)gridView contentItemCellAtIndexPath:(NSIndexPath *)indexPath;
+- (UICollectionViewCell *)gridView:(ExcelGridView *)gridView cellForContentItemAtIndexPath:(NSIndexPath *)indexPath;
 
 // 内容区的cell，TableView方式
-- (UITableViewCell *)gridView:(ExcelGridView *)gridView contentCellAtIndexPath:(NSIndexPath *)indexPath;
+- (UITableViewCell *)gridView:(ExcelGridView *)gridView cellForContentAtIndexPath:(NSIndexPath *)indexPath;
 
 
 #pragma mark - 内容区、标题区都用得到的代理方法
@@ -80,15 +76,39 @@ typedef NS_ENUM(NSUInteger, ExcelGridHorizontalHeaderType) {
 
 @interface ExcelGridView : ExcelGridFrame
 
+/**
+ 右下角内容区的组织方式，只有设置了这个属性以后才会添加一个内容视图
+ */
 @property (assign, nonatomic) ExcelGridVisualType gridVisualType;
+
+/**
+ 代理方法，用于事件的回传
+ */
 @property (weak, nonatomic) id <ExcelGridViewDelegate> delegate;
+
+/**
+ 横标题的组织方式，只有设置了这个属性以后才会添加横标题视图，用于展示标题内容
+ */
 @property (assign, nonatomic) ExcelGridHorizontalHeaderType horizontalHeaderType;
 
-@property (assign, nonatomic) NSUInteger numberOfLines;
-@property (assign, nonatomic) CGFloat groupHeaderHeight;
-@property (assign, nonatomic) CGFloat contentItemWidth;
-@property (assign, nonatomic) CGFloat rowHeight;
+@property (assign, nonatomic) NSUInteger numberOfLines;     // 有多少列
+@property (assign, nonatomic) CGFloat groupHeaderHeight;    // 横标题的高度
+@property (assign, nonatomic) CGFloat contentItemWidth;     // 内容区每个item的宽度
+@property (assign, nonatomic) CGFloat rowHeight;            // 每一行的高度
 
+/**
+ 刷新所有的tableView、collectionView的数据
+ */
 - (void)reloadData;
+
+/**
+ 在设置了内容区为collection以后，注册一个cell，外部在复用的时候可以直接取`contentScrollView`即可。
+ */
+- (void)registerClass:(Class)cls forCellInContentCollectionWithReuseIdentifier:(NSString *)identifier;
+
+/**
+ 在设置横标题为collection以后注册一个cell，外部在复用的时候可以直接取`horizontalHeaderScrollView`即可。
+ */
+- (void)registerClass:(Class)cls forCellInHoriHeaderCollectionWithReuseIdentifier:(NSString *)identifier;
 
 @end

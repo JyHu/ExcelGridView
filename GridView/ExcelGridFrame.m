@@ -11,7 +11,7 @@
 
 @interface ExcelGridFrame ()  <UIScrollViewDelegate, UITableViewDelegate, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
-@property (nonatomic, strong) UIView *horizontalHeaderContainerView;
+@property (nonatomic, strong, readwrite) UIView *horizontalHeaderContainerView;
 
 @property (nonatomic, strong) UIScrollView *containerScrollView;
 
@@ -35,6 +35,7 @@
         _horizontalHeaderHeight = 0;
         _verticalHeaderWidth = 120;
         _contentWidth = CGRectGetWidth(frame) - 120;
+        _bounces = YES;
     }
     return self;
 }
@@ -94,7 +95,7 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    if (!self.verticalHeaderScrollView || !self.contentScrollView) {
+    if (!self.verticalHeaderTableView || !self.contentScrollView) {
         return;
     }
     
@@ -112,7 +113,7 @@
     }
     
     // 左下角的竖向标题视图
-    self.verticalHeaderScrollView.frame = CGRectMake(0, self.horizontalHeaderHeight, self.verticalHeaderWidth, self.grid_height - self.horizontalHeaderHeight);
+    self.verticalHeaderTableView.frame = CGRectMake(0, self.horizontalHeaderHeight, self.verticalHeaderWidth, self.grid_height - self.horizontalHeaderHeight);
     
     // 右下的容器scroll，用于滚动上面的展示内容
     self.containerScrollView.frame = CGRectMake(self.verticalHeaderWidth, self.horizontalHeaderHeight, self.grid_width - self.verticalHeaderWidth, self.grid_height - self.horizontalHeaderHeight);
@@ -148,10 +149,10 @@
     UIScrollView *destScroll = nil;
     CGPoint contentOffset = scrollView.contentOffset;
     
-    if ([scrollView isEqual:self.verticalHeaderScrollView]) {
+    if ([scrollView isEqual:self.verticalHeaderTableView]) {
         destScroll = self.contentScrollView;
     } else if ([scrollView isEqual:self.contentScrollView]) {
-        destScroll = self.verticalHeaderScrollView;
+        destScroll = self.verticalHeaderTableView;
         // 纵向标题不可以横向滚动
         contentOffset.x = 0;
     } else if ([scrollView isEqual:self.containerScrollView]) {
@@ -189,17 +190,17 @@
     return _horizontalHeaderContainerView;
 }
 
-- (void)setVerticalHeaderScrollView:(UIScrollView *)verticalHeaderScrollView {
-    if (_verticalHeaderScrollView) {
-        _verticalHeaderScrollView.delegate = nil;
-        [_verticalHeaderScrollView removeFromSuperview];
+- (void)setVerticalHeaderTableView:(UITableView *)verticalHeaderTableView {
+    if (_verticalHeaderTableView) {
+        _verticalHeaderTableView.delegate = nil;
+        [_verticalHeaderTableView removeFromSuperview];
     }
     
-    _verticalHeaderScrollView = verticalHeaderScrollView;
+    _verticalHeaderTableView = verticalHeaderTableView;
     
-    if (_verticalHeaderScrollView) {
-        _verticalHeaderScrollView.delegate = self;
-        [self addSubview:_verticalHeaderScrollView];
+    if (_verticalHeaderTableView) {
+        _verticalHeaderTableView.delegate = self;
+        [self addSubview:_verticalHeaderTableView];
     }
     
     [self layoutSubviews];
@@ -285,6 +286,16 @@
         label.backgroundColor = [UIColor whiteColor];
         self.cornerView = label;
     }
+}
+
+- (void)setBounces:(BOOL)bounces {
+    _bounces = bounces;
+    
+    if (self.horizontalHeaderScrollView) {
+        self.horizontalHeaderScrollView.bounces = bounces;
+    }
+    
+    self.containerScrollView.bounces = bounces;
 }
 
 @end

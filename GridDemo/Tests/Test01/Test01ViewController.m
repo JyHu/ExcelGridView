@@ -41,6 +41,8 @@ UICollectionViewDelegateFlowLayout
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.title = @"自定义视图结构";
+    
     self.view.backgroundColor = [UIColor blueColor];
     
     self.verticalHeaderWidth = 135;
@@ -273,6 +275,10 @@ UICollectionViewDelegateFlowLayout
         
     }
     return _cornerLabel;
+}
+
+- (NSString *)alertInfo {
+    return @"不使用封装的框架，使用系统给的table、collection、scroll等组建测试页面";
 }
 
 - (void)didReceiveMemoryWarning {

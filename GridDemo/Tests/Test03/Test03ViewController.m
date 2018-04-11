@@ -22,6 +22,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.title = @"使用GridView默认标题";
+    
     [self.view addSubview:self.gridView];
     self.view.backgroundColor = [UIColor whiteColor];
 }
@@ -77,6 +79,10 @@
         [_gridView reloadData];
     }
     return _gridView;
+}
+
+- (NSString *)alertInfo {
+    return @"使用封装好的GridView，不做任何自定义，以最简单的方式直接设置内容，来实现测试页面。";
 }
 
 - (void)didReceiveMemoryWarning {

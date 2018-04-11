@@ -60,7 +60,7 @@
 /**
  03 纵向的标题视图，必须是UIScrollView或者其子类，可用于实现内容视图滚动时的联动
  */
-@property (nonatomic, weak) UIScrollView *verticalHeaderScrollView;
+@property (nonatomic, weak) UITableView *verticalHeaderTableView;
 
 /**
  04 展示的内容视图，必须是UIScrollView或者其子类，用于展示可滚动的多行列内容
@@ -86,5 +86,15 @@
  角标题，如果设置了角标题，那么cornerView就是一个label
  */
 @property (nonatomic, copy) NSString *cornerTitle;
+
+/**
+ 横向标题的容器视图
+ */
+@property (nonatomic, strong, readonly) UIView *horizontalHeaderContainerView;
+
+/**
+ 是否可以左右拉伸，默认是yes
+ */
+@property (assign, nonatomic) BOOL bounces;
 
 @end

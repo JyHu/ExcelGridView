@@ -35,8 +35,10 @@ UICollectionViewDelegateFlowLayout
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.title = @"使用GridFrame";
+    
     [self.view addSubview:self.gridFrame];
-    self.gridFrame.verticalHeaderScrollView = self.verticalTable;
+    self.gridFrame.verticalHeaderTableView = self.verticalTable;
     self.gridFrame.contentScrollView = self.contentCollection;
     self.gridFrame.cornerView = self.cornerTitleLabel;
     self.gridFrame.horizontalHeaderScrollView = self.headerScroll;
@@ -165,6 +167,10 @@ UICollectionViewDelegateFlowLayout
         _headerScroll.contentSize = CGSizeMake(900, 45);
     }
     return _headerScroll;
+}
+
+- (NSString *)alertInfo {
+    return @"使用封装的GridFrame，通过自定义框架里的各个子视图来实现测试页面";
 }
 
 - (void)didReceiveMemoryWarning {
