@@ -7,52 +7,21 @@
 
 #import <UIKit/UIKit.h>
 
+#define kGRID_DOUBLE_ZERO 10e-10
+
 @class ExcelGridFrame;
 
 @protocol ExcelGridFrameDelegate <NSObject>
-
-@optional
-
-/**
- 左侧标题视图的宽度
- 
- @param gridFrame Self
- @return 宽度
- */
-- (CGFloat)widthForVerticalHeaderInGridFrame:(ExcelGridFrame *)gridFrame;
-
-/**
- 顶部标题视图的高度
- 
- @param gridFrame Self
- @return 高度
- */
-- (CGFloat)heightForHorizontalHeaderInGridFrame:(ExcelGridFrame *)gridFrame;
-
-/**
- 右侧容器视图的内容宽度
- 
- @param gridFrame GridFrame
- @return 宽度
- */
-- (CGFloat)contentWidthInGridFrame:(ExcelGridFrame *)gridFrame;
 
 @end
 
 @interface ExcelGridFrame : UIView
 
 /**
- 设置内容视图的展示宽度
- 
- @param width 宽度
- */
-- (void)setupContentWidth:(CGFloat)width;
-
-/**
  当前表格视图的代理方法
  
  !!! 注意
- 这里的代理方法就几个可选方法，但是重点是为了实现下图的2、3、4三个可滚动的视图协议方法的转发，
+ 这里的代理重点是为了实现下图的2、3、4三个可滚动的视图协议方法的转发，
  即可以在使用的时候实现他们的协议(delegate)方法，但是不能添加其代理，否则当前表格视图就无法控
  制联动和其他效果
  */
@@ -98,5 +67,24 @@
  */
 @property (nonatomic, weak) UIScrollView *contentScrollView;
 
+/**
+ 横向标题的高度
+ */
+@property (nonatomic, assign) CGFloat horizontalHeaderHeight;
+
+/**
+ 纵向标题的宽度
+ */
+@property (nonatomic, assign) CGFloat verticalHeaderWidth;
+
+/**
+ 右下展示具体内容的容器的内容宽度
+ */
+@property (nonatomic, assign) CGFloat contentWidth;
+
+/**
+ 角标题，如果设置了角标题，那么cornerView就是一个label
+ */
+@property (nonatomic, copy) NSString *cornerTitle;
 
 @end

@@ -27,11 +27,11 @@
 
 - (ExcelGridView *)gridView {
     if (!_gridView) {
-        _gridView = [[ExcelGridView alloc] initWithFrame:CGRectMake(10, 10, kScreenWidth - 20, kScreenHeight - 20 - 64) visualType:ExcelGridVisualTypeCollectionView delegate:self];
-        _gridView.backgroundColor = [UIColor whiteColor];
-        _gridView.layer.masksToBounds = YES;
-        _gridView.layer.borderWidth = 1;
-        _gridView.layer.borderColor = [UIColor redColor].CGColor;
+//        _gridView = [[ExcelGridView alloc] initWithFrame:CGRectMake(10, 10, kScreenWidth - 20, kScreenHeight - 20 - 64) visualType:ExcelGridVisualTypeCollectionView delegate:self];
+//        _gridView.backgroundColor = [UIColor whiteColor];
+//        _gridView.layer.masksToBounds = YES;
+//        _gridView.layer.borderWidth = 1;
+//        _gridView.layer.borderColor = [UIColor redColor].CGColor;
     }
     return _gridView;
 }

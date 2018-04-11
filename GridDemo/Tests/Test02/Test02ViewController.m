@@ -40,16 +40,11 @@ UICollectionViewDelegateFlowLayout
     self.gridFrame.contentScrollView = self.contentCollection;
     self.gridFrame.cornerView = self.cornerTitleLabel;
     self.gridFrame.horizontalHeaderScrollView = self.headerScroll;
+    self.gridFrame.horizontalHeaderHeight = 45;
+    self.gridFrame.contentWidth = 900;
+    self.gridFrame.verticalHeaderWidth = 120;
     
     self.view.backgroundColor = [UIColor whiteColor];
-}
-
-- (CGFloat)heightForHorizontalHeaderInGridFrame:(ExcelGridFrame *)gridFrame {
-    return 45;
-}
-
-- (CGFloat)contentWidthInGridFrame:(ExcelGridFrame *)gridFrame {
-    return 900;
 }
 
 #pragma mark - table
@@ -80,7 +75,7 @@ UICollectionViewDelegateFlowLayout
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 10;
+    return 60;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -98,7 +93,7 @@ UICollectionViewDelegateFlowLayout
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-    return CGSizeMake(collectionView.frame.size.width, 10);
+    return CGSizeMake(collectionView.frame.size.width, 60);
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -128,7 +123,7 @@ UICollectionViewDelegateFlowLayout
         _verticalTable = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
         _verticalTable.backgroundColor = [UIColor greenColor];
         _verticalTable.dataSource = self;
-        _verticalTable.sectionHeaderHeight = 10;
+        _verticalTable.sectionHeaderHeight = 60;
         _verticalTable.sectionFooterHeight = 0;
     }
     return _verticalTable;

@@ -65,4 +65,10 @@
     self.grid_y = grid_maxY - self.grid_height;
 }
 
+- (void)grid_removeAllSubViews {
+    for (UIView *view in self.subviews) {
+        [view removeFromSuperview];
+    }
+}
+
 @end

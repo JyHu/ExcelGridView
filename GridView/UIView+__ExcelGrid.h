@@ -16,4 +16,6 @@
 @property (nonatomic, assign) CGFloat grid_width;
 @property (nonatomic, assign) CGFloat grid_height;
 
+- (void)grid_removeAllSubViews;
+
 @end

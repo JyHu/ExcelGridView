@@ -26,10 +26,6 @@
     self.view.backgroundColor = [UIColor whiteColor];
 }
 
-- (ExcelGridHorizontalHeaderType)horizontalHeaderTypeOfGridView:(ExcelGridView *)gridView {
-    return ExcelGridHorizontalHeaderTypeDefault;
-}
-
 - (void)gridView:(ExcelGridView *)gridView horizontalHeaderCell:(ExcelGridItemCell *)cell atIndex:(NSInteger)index {
     cell.textLabel.text = @"AA";
     cell.backgroundColor = [UIColor randomColor];
@@ -53,30 +49,6 @@
     return 20;
 }
 
-- (NSInteger)numberOfLinesInGridView:(ExcelGridView *)gridView {
-    return 10;
-}
-
-- (CGFloat)contentWidthInGridFrame:(ExcelGridFrame *)gridFrame {
-    return 900;
-}
-
-- (CGFloat)gridView:(ExcelGridView *)gridView widthForLineWithIndex:(NSInteger)lineIndex {
-    return 90;
-}
-
-- (CGFloat)gridView:(ExcelGridView *)gridView heightForHeaderInSection:(NSInteger)section {
-    return 10;
-}
-
-- (CGFloat)heightForHorizontalHeaderInGridFrame:(ExcelGridFrame *)gridFrame {
-    return 45;
-}
-
-- (CGFloat)widthForVerticalHeaderInGridFrame:(ExcelGridFrame *)gridFrame {
-    return 120;
-}
-
 - (void)gridView:(ExcelGridView *)girdView contentItemCell:(ExcelGridItemCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     cell.textLabel.text = @"Content";
     cell.backgroundColor = [UIColor randomColor];
@@ -85,11 +57,24 @@
 
 - (ExcelGridView *)gridView {
     if (!_gridView) {
-        _gridView = [[ExcelGridView alloc] initWithFrame:CGRectMake(10, 10, kScreenWidth - 20, kScreenHeight - 20 - 64) visualType:ExcelGridVisualTypeCollectionView delegate:self];
-        _gridView.backgroundColor = [UIColor whiteColor];
+        _gridView = [[ExcelGridView alloc] initWithFrame:CGRectMake(10, 10, kScreenWidth - 20, kScreenHeight - 20 - 64 - 34 - 20)];
+        _gridView.delegate = self;
+        _gridView.gridVisualType = ExcelGridVisualTypeCollectionView;
+        _gridView.horizontalHeaderType = ExcelGridHorizontalHeaderTypeDefault;
+        _gridView.backgroundColor = [UIColor redColor];
         _gridView.layer.masksToBounds = YES;
         _gridView.layer.borderWidth = 1;
         _gridView.layer.borderColor = [UIColor redColor].CGColor;
+        _gridView.horizontalHeaderHeight = 45;
+        _gridView.verticalHeaderWidth = 120;
+        _gridView.contentWidth = 900;
+        _gridView.numberOfLines = 10;
+        _gridView.rowHeight = 44;
+        _gridView.contentItemWidth = 90;
+        _gridView.groupHeaderHeight = 10;
+        _gridView.cornerTitle = @"Corner";
+        
+        [_gridView reloadData];
     }
     return _gridView;
 }

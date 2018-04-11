@@ -26,8 +26,15 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
+        
         [self addSubview:self.containerScrollView];
         [self addSubview:self.horizontalHeaderContainerView];
+        
+        self.backgroundColor = [UIColor whiteColor];
+        
+        _horizontalHeaderHeight = 0;
+        _verticalHeaderWidth = 120;
+        _contentWidth = CGRectGetWidth(frame) - 120;
     }
     return self;
 }
@@ -84,11 +91,6 @@
 
 #pragma handler
 
-- (void)setupContentWidth:(CGFloat)width {
-    self.containerScrollView.contentSize = CGSizeMake(width, self.grid_height);
-    [self layoutSubviews];
-}
-
 - (void)layoutSubviews {
     [super layoutSubviews];
     
@@ -96,50 +98,40 @@
         return;
     }
     
-    // 左边标题的宽度
-    CGFloat vertHeaderWidth = 120;
-    if (self.gridFrameDelegate && [self.gridFrameDelegate respondsToSelector:@selector(widthForVerticalHeaderInGridFrame:)]) {
-        vertHeaderWidth = [self.gridFrameDelegate widthForVerticalHeaderInGridFrame:self];
+    // 上部分容器视图，用于放角标视图和横向标题
+    self.horizontalHeaderContainerView.frame = CGRectMake(0, 0, self.grid_width, self.horizontalHeaderHeight);
+    
+    // 左上角的角标题视图
+    if (self.cornerView) {
+        self.cornerView.frame = CGRectMake(0, 0, self.verticalHeaderWidth, self.horizontalHeaderHeight);
     }
     
-    // 顶部标题的高度
-    CGFloat horiHeaderHeight = 0;
-    if (self.horizontalHeaderScrollView || self.cornerView) {
-        self.horizontalHeaderContainerView.hidden = NO;
-        
-        horiHeaderHeight = (self.horizontalHeaderScrollView ?: self.cornerView).grid_height;
-        
-        if (self.gridFrameDelegate && [self.gridFrameDelegate respondsToSelector:@selector(heightForHorizontalHeaderInGridFrame:)]) {
-            horiHeaderHeight = [self.gridFrameDelegate heightForHorizontalHeaderInGridFrame:self];
-        }
-        
-        self.horizontalHeaderContainerView.frame = CGRectMake(0, 0, self.grid_width, horiHeaderHeight);
-        
-        if (self.horizontalHeaderScrollView) {
-            self.horizontalHeaderScrollView.frame = CGRectMake(vertHeaderWidth, 0, self.grid_width - vertHeaderWidth, horiHeaderHeight);
-        }
-        
-        if (self.cornerView) {
-            self.cornerView.frame = CGRectMake(0, 0, vertHeaderWidth, horiHeaderHeight);
-        }
-    } else {
-        self.horizontalHeaderContainerView.hidden = YES;
+    // 右上角滚动的标题视图
+    if (self.horizontalHeaderScrollView) {
+        self.horizontalHeaderScrollView.frame = CGRectMake(self.verticalHeaderWidth, 0, self.grid_width - self.verticalHeaderWidth, self.horizontalHeaderHeight);
     }
     
-    // 左侧标题的frame
-    self.verticalHeaderScrollView.frame = CGRectMake(0, horiHeaderHeight, vertHeaderWidth, self.grid_height - horiHeaderHeight);
+    // 左下角的竖向标题视图
+    self.verticalHeaderScrollView.frame = CGRectMake(0, self.horizontalHeaderHeight, self.verticalHeaderWidth, self.grid_height - self.horizontalHeaderHeight);
     
-    self.containerScrollView.frame = CGRectMake(vertHeaderWidth, horiHeaderHeight, self.grid_width - vertHeaderWidth, self.grid_height - horiHeaderHeight);
+    // 右下的容器scroll，用于滚动上面的展示内容
+    self.containerScrollView.frame = CGRectMake(self.verticalHeaderWidth, self.horizontalHeaderHeight, self.grid_width - self.verticalHeaderWidth, self.grid_height - self.horizontalHeaderHeight);
+    self.containerScrollView.contentSize = CGSizeMake(self.contentWidth, self.containerScrollView.grid_height);
     
-    // 右侧容器视图的容器内容大小
-    if (self.gridFrameDelegate && [self.gridFrameDelegate respondsToSelector:@selector(contentWidthInGridFrame:)]) {
-        self.containerScrollView.contentSize = CGSizeMake([self.gridFrameDelegate contentWidthInGridFrame:self], self.containerScrollView.grid_height);
-    } else {
-        self.containerScrollView.contentSize = self.containerScrollView.frame.size;
+    // 右下的内容scroll，用于展示滚动的显示内容
+    self.contentScrollView.frame = CGRectMake(0, 0, self.contentWidth, self.containerScrollView.grid_height);
+}
+
+- (void)setScrollerView:(UIScrollView *)scrollView backgroundColor:(UIColor *)backgroundColor {
+    if (scrollView && backgroundColor) {
+        if ([scrollView isKindOfClass:[UIScrollView class]]) {
+            scrollView.backgroundColor = backgroundColor;
+        } else if ([scrollView isKindOfClass:[UITableView class]]) {
+            ((UITableView *)scrollView).backgroundColor = backgroundColor;
+        } else if ([scrollView isKindOfClass:[UICollectionView class]]) {
+            ((UICollectionView *)scrollView).backgroundColor = backgroundColor;
+        }
     }
-    
-    // 右侧容器视图的frame
-    self.contentScrollView.frame = CGRectMake(0, 0, self.containerScrollView.contentSize.width, self.containerScrollView.contentSize.height);
 }
 
 #pragma mark - Scroll view delegate
@@ -154,20 +146,26 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     UIScrollView *destScroll = nil;
+    CGPoint contentOffset = scrollView.contentOffset;
+    
     if ([scrollView isEqual:self.verticalHeaderScrollView]) {
         destScroll = self.contentScrollView;
     } else if ([scrollView isEqual:self.contentScrollView]) {
         destScroll = self.verticalHeaderScrollView;
+        // 纵向标题不可以横向滚动
+        contentOffset.x = 0;
     } else if ([scrollView isEqual:self.containerScrollView]) {
         if (self.horizontalHeaderScrollView) {
             destScroll = self.horizontalHeaderScrollView;
+            // 横向标题不可以纵向滚动
+            contentOffset.y = 0;
         }
     } else if (self.horizontalHeaderScrollView && [scrollView isEqual:self.horizontalHeaderScrollView]) {
         destScroll = self.containerScrollView;
     }
     
     if (destScroll) {
-        destScroll.contentOffset = scrollView.contentOffset;
+        destScroll.contentOffset = contentOffset;
     }
 }
 
@@ -177,7 +175,8 @@
     if (!_containerScrollView) {
         _containerScrollView = [[UIScrollView alloc] init];
         _containerScrollView.delegate = self;
-        _containerScrollView.backgroundColor = [UIColor whiteColor];
+        _containerScrollView.backgroundColor = [UIColor clearColor];
+        _containerScrollView.alwaysBounceVertical = NO;
     }
     return _containerScrollView;
 }
@@ -185,13 +184,14 @@
 - (UIView *)horizontalHeaderContainerView {
     if (!_horizontalHeaderContainerView) {
         _horizontalHeaderContainerView = [[UIView alloc] init];
-        _horizontalHeaderContainerView.hidden = YES;
+        _horizontalHeaderContainerView.backgroundColor = [UIColor clearColor];
     }
     return _horizontalHeaderContainerView;
 }
 
 - (void)setVerticalHeaderScrollView:(UIScrollView *)verticalHeaderScrollView {
     if (_verticalHeaderScrollView) {
+        _verticalHeaderScrollView.delegate = nil;
         [_verticalHeaderScrollView removeFromSuperview];
     }
     
@@ -207,6 +207,7 @@
 
 - (void)setContentScrollView:(UIScrollView *)contentScrollView {
     if (_contentScrollView) {
+        _contentScrollView.delegate = nil;
         [_contentScrollView removeFromSuperview];
     }
     
@@ -222,6 +223,7 @@
 
 - (void)setHorizontalHeaderScrollView:(UIScrollView *)horizontalHeaderScrollView {
     if (_horizontalHeaderScrollView) {
+        _horizontalHeaderScrollView.delegate = nil;
         [_horizontalHeaderScrollView removeFromSuperview];
     }
     
@@ -231,6 +233,7 @@
         _horizontalHeaderScrollView.delegate = self;
         [self.horizontalHeaderContainerView addSubview:horizontalHeaderScrollView];
     }
+    
     [self layoutSubviews];
 }
 
@@ -252,6 +255,36 @@
     _gridFrameDelegate = gridFrameDelegate;
     
     [self layoutSubviews];
+}
+
+- (void)setContentWidth:(CGFloat)contentWidth {
+    _contentWidth = contentWidth;
+    [self layoutSubviews];
+}
+
+- (void)setHorizontalHeaderHeight:(CGFloat)horizontalHeaderHeight {
+    _horizontalHeaderHeight = horizontalHeaderHeight;
+    self.horizontalHeaderContainerView.hidden = horizontalHeaderHeight == 0;
+    [self layoutSubviews];
+}
+
+- (void)setVerticalHeaderWidth:(CGFloat)verticalHeaderWidth {
+    _verticalHeaderWidth = verticalHeaderWidth;
+    [self layoutSubviews];
+}
+
+- (void)setCornerTitle:(NSString *)cornerTitle {
+    _cornerTitle = cornerTitle;
+    
+    if (self.cornerView && [self.cornerView isKindOfClass:[UILabel class]]) {
+        ((UILabel *)self.cornerView).text = cornerTitle;
+    } else {
+        UILabel *label = [[UILabel alloc] init];
+        label.text = cornerTitle;
+        label.textAlignment = NSTextAlignmentCenter;
+        label.backgroundColor = [UIColor whiteColor];
+        self.cornerView = label;
+    }
 }
 
 @end

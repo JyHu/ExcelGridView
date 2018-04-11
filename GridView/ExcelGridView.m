@@ -43,13 +43,6 @@ UICollectionViewDelegateFlowLayout
  */
 @property (nonatomic, strong) UIScrollView *grid_contentScrollView;
 
-@property (nonatomic, assign, readwrite) ExcelGridVisualType visualType;
-@property (nonatomic, strong) UILabel *cornerTitleLabel;
-
-@property (nonatomic, strong) NSMutableSet *collectionContentIdentifiers;
-@property (nonatomic, assign, readwrite) ExcelGridHorizontalHeaderType horizontalHeaderType;
-@property (nonatomic, weak, readwrite) id <ExcelGridViewDelegate> delegate;
-
 @end
 
 
@@ -57,118 +50,74 @@ UICollectionViewDelegateFlowLayout
 
 
 - (instancetype)init {
-    return nil;
+    return [self initWithFrame:CGRectZero];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
-    return nil;
-}
-
-- (instancetype)initWithVisualType:(ExcelGridVisualType)visualType delegate:(id<ExcelGridViewDelegate>)delegate {
-    return [self initWithFrame:CGRectZero visualType:visualType delegate:delegate];
-}
-
-- (instancetype)initWithFrame:(CGRect)frame visualType:(ExcelGridVisualType)visualType delegate:(id<ExcelGridViewDelegate>)delegate {
     if (self = [super initWithFrame:frame]) {
-        self.visualType = visualType;
-        self.delegate = delegate;
-        self.horizontalHeaderType = ExcelGridHorizontalHeaderTypeNone;
-        self.gridFrameDelegate = self;
-        
-        [self reloadFrame];
+        [self initialize];
     }
     return self;
 }
 
-- (void)reloadFrame {
-    if (self.visualType == ExcelGridVisualTypeTableView) {
-        // 添加TableView
-        UITableView *tempTable = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStyleGrouped];
-        tempTable.dataSource = self;
-        tempTable.backgroundColor = [UIColor whiteColor];
-        tempTable.sectionHeaderHeight = 0;
-        tempTable.sectionFooterHeight = 0;
-        tempTable.estimatedSectionFooterHeight = 0;
-        tempTable.estimatedSectionHeaderHeight = 0;
-        
-        self.grid_contentScrollView = tempTable;
-    } else {
-        // 添加CollectionView
-        UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-        UICollectionView *tempCollection = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
-        tempCollection.dataSource = self;
-        tempCollection.backgroundColor = [UIColor whiteColor];
-        [tempCollection registerClass:[ExcelGridItemCell class] forCellWithReuseIdentifier:__GridViewDefaultItemCellIdentifier__];
-        
-        self.grid_contentScrollView = tempCollection;
-    }
-    
-    if ([self.delegate respondsToSelector:@selector(horizontalHeaderTypeOfGridView:)]) {
-        self.horizontalHeaderType = [self.delegate horizontalHeaderTypeOfGridView:self];
-    }
-    
-    self.contentScrollView = self.grid_contentScrollView;
+- (void)initialize {
     self.verticalHeaderScrollView = self.grid_verticalHeaderScrollView;
+    self.gridFrameDelegate = self;
     
-    if (self.horizontalHeaderType == ExcelGridHorizontalHeaderTypeDefault ||
-        self.horizontalHeaderType == ExcelGridHorizontalHeaderTypeCustomerCell) {
-        UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-        flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
-        collectionView.backgroundColor = [UIColor whiteColor];
-        collectionView.dataSource = self;
-        [collectionView registerClass:[ExcelGridItemCell class] forCellWithReuseIdentifier:__GridViewDefaultHoriItemCellIdentifier__];
-        self.grid_horizontalHeaderScrollView = collectionView;
-    } else if (self.horizontalHeaderType == ExcelGridHorizontalHeaderTypeCustomerView) {
-        UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectZero];
-        self.grid_horizontalHeaderScrollView = scrollView;
-        [self setupHorizontalHeaderViews];
-    } else if (self.horizontalHeaderType == ExcelGridHorizontalHeaderTypeManual) {
-        if ([self.delegate respondsToSelector:@selector(horizontalHeaderOfGridView:)]) {
-            self.grid_horizontalHeaderScrollView = [self.delegate horizontalHeaderOfGridView:self];
-        } else {
-            NSLog(@"在你设置了GridHorizontalHeaderTypeManual类型后最好实现horizontalHeaderOfGridView:这个协议方法，否则上面会有空缺");
+    _rowHeight = 44;
+    _contentItemWidth = 90;
+    _groupHeaderHeight = 0;
+    _numberOfLines = 1;
+}
+
+- (void)reloadData {
+    if (self.grid_verticalHeaderScrollView) {
+        [self.grid_verticalHeaderScrollView reloadData];
+    }
+    if (self.grid_contentScrollView) {
+        if ([self.grid_contentScrollView isKindOfClass:[UITableView class]]) {
+            [(UITableView *)self.grid_contentScrollView reloadData];
+        }
+        if ([self.grid_contentScrollView isKindOfClass:[UICollectionView class]]) {
+            [(UICollectionView *)self.grid_contentScrollView reloadData];
         }
     }
-    self.horizontalHeaderScrollView = self.grid_horizontalHeaderScrollView;
     
-    if ([self.delegate respondsToSelector:@selector(cornerViewInGridView:)]) {
-        self.cornerView = [self.delegate cornerViewInGridView:self];
-    } else if ([self.delegate respondsToSelector:@selector(gridView:titleOfCornerLabel:)]) {
-        [self.delegate gridView:self titleOfCornerLabel:self.cornerTitleLabel];
-        self.cornerView = self.cornerTitleLabel;
+    if (self.grid_horizontalHeaderScrollView && [self.grid_horizontalHeaderScrollView isKindOfClass:[UICollectionView class]]) {
+        [(UICollectionView *)self.grid_horizontalHeaderScrollView reloadData];
     }
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    [self reloadData];
 }
 
 #pragma mark - horizontal header custom view sources
 
 - (void)setupHorizontalHeaderViews {
     if (self.delegate && [self.delegate respondsToSelector:@selector(numberOfLinesInGridView:)]) {
+        [self.grid_horizontalHeaderScrollView grid_removeAllSubViews];
+        
         if ([self.delegate respondsToSelector:@selector(gridView:viewForHorizontalHeaderAtIndex:)]) {
-            CGFloat height = 45;
             CGFloat originx = 0;
-            if ([self.delegate respondsToSelector:@selector(heightForHorizontalHeaderInGridFrame:)]) {
-                height = [self.delegate heightForHorizontalHeaderInGridFrame:self];
-            }
-            if ([self.delegate respondsToSelector:@selector(contentWidthInGridFrame:)]) {
-                self.grid_horizontalHeaderScrollView.contentSize = CGSizeMake([self.delegate contentWidthInGridFrame:self], height);
-            }
+            
+            self.grid_horizontalHeaderScrollView.contentSize = CGSizeMake(self.contentWidth, self.horizontalHeaderHeight);
             
             for (NSInteger i = 0; i < [self.delegate numberOfLinesInGridView:self]; i ++) {
                 UIView *view = [self.delegate gridView:self viewForHorizontalHeaderAtIndex:i];
                 if (view) {
-                    CGFloat width = 72;
+                    CGFloat width = self.contentItemWidth;
                     if ([self.delegate respondsToSelector:@selector(gridView:widthForLineWithIndex:)]) {
                         width = [self.delegate gridView:self widthForLineWithIndex:i];
                     }
                     
-                    view.frame = CGRectMake(originx, 0, width, height);
+                    view.frame = CGRectMake(originx, 0, width, self.horizontalHeaderHeight);
                     originx += width;
                     [self.grid_horizontalHeaderScrollView addSubview:view];
                 }
             }
-        } else {
-            
         }
     }
 }
@@ -209,11 +158,17 @@ UICollectionViewDelegateFlowLayout
                 return [self.delegate gridView:self titleCellOfVerticalHeaderAtIndexPath:indexPath];
             }
             
-            return nil;
-        } else {
-            if ([self.delegate respondsToSelector:@selector(gridView:contentCellAtIndexPath:)]) {
-                return [self.delegate gridView:self contentCellAtIndexPath:indexPath];
-            }
+            NSAssert2(0, @"纵向标题的设置必须实现`%@`和`%@`方法之一",
+                      NSStringFromSelector(@selector(gridView:verticalHeaderCell:atIndexPath:)),
+                      NSStringFromSelector(@selector(gridView:titleCellOfVerticalHeaderAtIndexPath:)));
+            
+        } else if ([tableView isEqual:self.grid_contentScrollView]) {
+            
+            NSAssert1([self.delegate respondsToSelector:@selector(gridView:contentCellAtIndexPath:)],
+                      @"ExcelGridVisualTypeTableView类型的内容视图，必须实现`%@`方法",
+                      NSStringFromSelector(@selector(gridView:contentCellAtIndexPath:)));
+            
+            return [self.delegate gridView:self contentCellAtIndexPath:indexPath];
         }
     }
     
@@ -225,7 +180,7 @@ UICollectionViewDelegateFlowLayout
         return [self.delegate gridView:self heightForRow:indexPath.row inSection:indexPath.section];
     }
     
-    return 44;
+    return self.rowHeight;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -233,11 +188,16 @@ UICollectionViewDelegateFlowLayout
         return [self.delegate gridView:self heightForHeaderInSection:section];
     }
     
-    return 10e-10;
+    if (self.groupHeaderHeight == 0) {
+        return kGRID_DOUBLE_ZERO;
+    }
+    
+    return self.groupHeaderHeight;
 }
 
 #pragma mark - collection view delegate datasource
 
+// 分组数
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     if (self.delegate) {
         // 如果是内容的Collection，则需要判断代理
@@ -251,9 +211,10 @@ UICollectionViewDelegateFlowLayout
     return 1;
 }
 
+// 每个分组有多少的item
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     NSInteger rows = 0;
-    NSInteger lines = 0;
+    NSInteger lines = self.numberOfLines;
     if (self.delegate) {
         if ([self.delegate respondsToSelector:@selector(numberOfLinesInGridView:)]) {
             lines = [self.delegate numberOfLinesInGridView:self];
@@ -272,6 +233,7 @@ UICollectionViewDelegateFlowLayout
     return rows * lines;
 }
 
+// 设置item
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (self.delegate) {
         if ([collectionView isEqual:self.grid_contentScrollView]) {
@@ -285,17 +247,28 @@ UICollectionViewDelegateFlowLayout
                 return [self.delegate gridView:self contentItemCellAtIndexPath:indexPath];
             }
             
+            NSAssert2(0, @"Collection类型的内容区必须实现`%@`与`%@`两个代理方法中的其中一个",
+                      NSStringFromSelector(@selector(gridView:contentItemCell:atIndexPath:)),
+                      NSStringFromSelector(@selector(gridView:contentItemCellAtIndexPath:)));
+            
             return nil;
         } else {
-            if ([self.delegate respondsToSelector:@selector(gridView:horizontalHeaderCell:atIndex:)]) {
+            if (self.horizontalHeaderType == ExcelGridHorizontalHeaderTypeDefault) {
                 ExcelGridItemCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:__GridViewDefaultHoriItemCellIdentifier__ forIndexPath:indexPath];
-                [self.delegate gridView:self horizontalHeaderCell:cell atIndex:indexPath.row];
+                if ([self.delegate respondsToSelector:@selector(gridView:horizontalHeaderCell:atIndex:)]) {
+                    [self.delegate gridView:self horizontalHeaderCell:cell atIndex:indexPath.row];
+                } else {
+                    cell.textLabel.text = @"--";
+                }
                 
                 return cell;
-            } else if ([self.delegate respondsToSelector:@selector(gridView:cellForHorizontalHeaderAtIndex:)]) {
-                if (!self.horizontalHeaderScrollView) {
-                    self.horizontalHeaderScrollView = self.grid_horizontalHeaderScrollView;
-                }
+            }
+            
+            if (self.horizontalHeaderType == ExcelGridHorizontalHeaderTypeCustomerCell) {
+                NSAssert1([self.delegate respondsToSelector:@selector(gridView:cellForHorizontalHeaderAtIndex:)],
+                          @"ExcelGridHorizontalHeaderTypeCustomerCell类型的横向标题必须实现`%@`方法",
+                          NSStringFromSelector(@selector(gridView:cellForHorizontalHeaderAtIndex:)));
+                
                 return [self.delegate gridView:self cellForHorizontalHeaderAtIndex:indexPath.row];
             }
         }
@@ -303,28 +276,30 @@ UICollectionViewDelegateFlowLayout
     return nil;
 }
 
+// 设置每个item的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    CGFloat width = 60;
-    CGFloat height = 44;
-    NSInteger lineCount = 1;
+    
+    CGFloat width = self.contentItemWidth;
+    CGFloat height = self.rowHeight;
+    NSInteger lineCount = self.numberOfLines;
+    
     if (self.delegate) {
+        // 获取内容区的列宽
         if ([self.delegate respondsToSelector:@selector(gridView:widthForLineWithIndex:)]) {
             width = [self.delegate gridView:self widthForLineWithIndex:(indexPath.row % lineCount)];
         }
         
         if ([collectionView isEqual:self.grid_horizontalHeaderScrollView]) {
-            if ([self.delegate respondsToSelector:@selector(heightForHorizontalHeaderInGridFrame:)]) {
-                height = [self.delegate heightForHorizontalHeaderInGridFrame:self];
-            }
-            
-            return CGSizeMake(width, height);
+            // 设置横向标题的大小
+            return CGSizeMake(width, self.horizontalHeaderHeight);
         }
         
-        
+        // 获取内容区的列数
         if ([self.delegate respondsToSelector:@selector(numberOfLinesInGridView:)]) {
             lineCount = [self.delegate numberOfLinesInGridView:self] ?: 1;
         }
         
+        // 获取每行内容的高度
         if ([self.delegate respondsToSelector:@selector(gridView:heightForRow:inSection:)]) {
             height = [self.delegate gridView:self heightForRow:((NSInteger)(indexPath.row / lineCount)) inSection:indexPath.section];
         }
@@ -333,61 +308,92 @@ UICollectionViewDelegateFlowLayout
     return CGSizeMake(width, height);
 }
 
+// cell间距
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     return 0;
 }
 
+// 组间距
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
     return 0;
 }
 
+// section header 设置
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
+    
+    CGFloat headerHeight = self.groupHeaderHeight;
     if ([collectionView isEqual:self.grid_contentScrollView]) {
         if (self.delegate && [self.delegate respondsToSelector:@selector(gridView:heightForHeaderInSection:)]) {
-            return CGSizeMake(collectionView.grid_width, [self.delegate gridView:self heightForHeaderInSection:section]);
+            headerHeight = [self.delegate gridView:self heightForHeaderInSection:section];
         }
+        
+        if (headerHeight == 0) {
+            return CGSizeZero;
+        }
+        
+        return CGSizeMake(collectionView.grid_width, headerHeight);
     }
     
     return CGSizeZero;
 }
 
+// cell点击事件
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"clicked collection cell");
 }
 
-#pragma mark - GridFrameDelegate
-
-- (CGFloat)widthForVerticalHeaderInGridFrame:(ExcelGridFrame *)gridFrame {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(widthForVerticalHeaderInGridFrame:)]) {
-        return [self.delegate widthForVerticalHeaderInGridFrame:self];
-    }
-    
-    return 120;
-}
-
-- (CGFloat)heightForHorizontalHeaderInGridFrame:(ExcelGridFrame *)gridFrame {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(heightForHorizontalHeaderInGridFrame:)]) {
-        return [self.delegate heightForHorizontalHeaderInGridFrame:self];
-    }
-    
-    return 45;
-}
-
-- (CGFloat)contentWidthInGridFrame:(ExcelGridFrame *)gridFrame {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(contentWidthInGridFrame:)]) {
-        return [self.delegate contentWidthInGridFrame:self];
-    }
-    
-    return self.grid_width;
-}
-
 #pragma mark - getter setter
+
+- (void)setGridVisualType:(ExcelGridVisualType)gridVisualType {
+    _gridVisualType = gridVisualType;
+    
+    if (self.contentScrollView && self.grid_contentScrollView &&
+        [self.contentScrollView isEqual:self.grid_contentScrollView]) {
+        self.contentScrollView = nil;
+    }
+    
+    if (self.grid_contentScrollView) {
+        if ((self.gridVisualType == ExcelGridVisualTypeTableView &&
+             ![self.grid_contentScrollView isKindOfClass:[UITableView class]]) ||
+            (self.gridVisualType == ExcelGridVisualTypeCollectionView &&
+             ![self.grid_contentScrollView isKindOfClass:[UICollectionView class]])) {
+                self.grid_contentScrollView = nil;
+            }
+    }
+    
+    if (!self.grid_contentScrollView) {
+        if (self.gridVisualType == ExcelGridVisualTypeTableView) {
+            // 添加TableView
+            UITableView *tempTable = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStyleGrouped];
+            tempTable.dataSource = self;
+            tempTable.backgroundColor = [UIColor clearColor];
+            tempTable.sectionHeaderHeight = 0;
+            tempTable.sectionFooterHeight = 0;
+            tempTable.estimatedSectionFooterHeight = 0;
+            tempTable.estimatedSectionHeaderHeight = 0;
+            
+            self.grid_contentScrollView = tempTable;
+        } else if (self.gridVisualType == ExcelGridVisualTypeCollectionView) {
+            // 添加CollectionView
+            UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+            UICollectionView *tempCollection = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
+            tempCollection.dataSource = self;
+            tempCollection.backgroundColor = [UIColor clearColor];
+            [tempCollection registerClass:[ExcelGridItemCell class] forCellWithReuseIdentifier:__GridViewDefaultItemCellIdentifier__];
+            
+            self.grid_contentScrollView = tempCollection;
+        }
+    }
+    
+    self.contentScrollView = self.grid_contentScrollView;
+}
 
 - (UITableView *)grid_verticalHeaderScrollView {
     if (!_grid_verticalHeaderScrollView) {
         _grid_verticalHeaderScrollView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
         _grid_verticalHeaderScrollView.dataSource = self;
-        _grid_verticalHeaderScrollView.backgroundColor = [UIColor whiteColor];
+        _grid_verticalHeaderScrollView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kGRID_DOUBLE_ZERO, kGRID_DOUBLE_ZERO)];
+        _grid_verticalHeaderScrollView.backgroundColor = [UIColor clearColor];
         _grid_verticalHeaderScrollView.sectionHeaderHeight = 0;
         _grid_verticalHeaderScrollView.sectionFooterHeight = 0;
         _grid_verticalHeaderScrollView.rowHeight = 0;
@@ -395,24 +401,35 @@ UICollectionViewDelegateFlowLayout
         _grid_verticalHeaderScrollView.estimatedSectionFooterHeight = 0;
         _grid_verticalHeaderScrollView.estimatedSectionHeaderHeight = 0;
         _grid_verticalHeaderScrollView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [_grid_verticalHeaderScrollView reloadData];
     }
     return _grid_verticalHeaderScrollView;
 }
 
-- (UILabel *)cornerTitleLabel {
-    if (!_cornerTitleLabel) {
-        _cornerTitleLabel = [[UILabel alloc] init];
-        _cornerTitleLabel.font = [UIFont systemFontOfSize:15];
-        _cornerTitleLabel.textAlignment = NSTextAlignmentCenter;
+- (void)setHorizontalHeaderType:(ExcelGridHorizontalHeaderType)horizontalHeaderType {
+    _horizontalHeaderType = horizontalHeaderType;
+    
+    if (horizontalHeaderType == ExcelGridHorizontalHeaderTypeDefault ||
+        self.horizontalHeaderType == ExcelGridHorizontalHeaderTypeCustomerCell) {
+        UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
+        collectionView.backgroundColor = [UIColor clearColor];
+        collectionView.dataSource = self;
+        [collectionView registerClass:[ExcelGridItemCell class] forCellWithReuseIdentifier:__GridViewDefaultHoriItemCellIdentifier__];
+        self.grid_horizontalHeaderScrollView = collectionView;
+    } else if (self.horizontalHeaderType == ExcelGridHorizontalHeaderTypeCustomerView) {
+        UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectZero];
+        scrollView.backgroundColor = [UIColor clearColor];
+        self.grid_horizontalHeaderScrollView = scrollView;
+        [self setupHorizontalHeaderViews];
     }
-    return _cornerTitleLabel;
+    
+    self.horizontalHeaderScrollView = self.grid_horizontalHeaderScrollView;
 }
 
-- (NSMutableSet *)collectionContentIdentifiers {
-    if (!_collectionContentIdentifiers) {
-        _collectionContentIdentifiers = [[NSMutableSet alloc] init];
-    }
-    return _collectionContentIdentifiers;
+- (void)setDelegate:(id<ExcelGridViewDelegate>)delegate {
+    _delegate = delegate;
 }
 
 @end

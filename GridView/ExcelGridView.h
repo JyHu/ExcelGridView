@@ -7,7 +7,6 @@
 
 #import "ExcelGridFrame.h"
 
-
 typedef NS_ENUM(NSUInteger, ExcelGridVisualType) {
     ExcelGridVisualTypeTableView,       // 内容区是tableview
     ExcelGridVisualTypeCollectionView,  // 内容区是collectionview
@@ -18,7 +17,6 @@ typedef NS_ENUM(NSUInteger, ExcelGridHorizontalHeaderType) {
     ExcelGridHorizontalHeaderTypeDefault,       // 默认的，collection
     ExcelGridHorizontalHeaderTypeCustomerCell,  // collection，自定义cell
     ExcelGridHorizontalHeaderTypeCustomerView,  // scrollview，自定义view
-    ExcelGridHorizontalHeaderTypeManual,        // 整个的自定义
 };
 
 @class ExcelGridView;
@@ -27,13 +25,6 @@ typedef NS_ENUM(NSUInteger, ExcelGridHorizontalHeaderType) {
 @protocol ExcelGridViewDelegate <ExcelGridFrameDelegate>
 
 @optional
-
-#pragma mark - 角标题
-
-// 角标题视图
-- (UIView *)cornerViewInGridView:(ExcelGridView *)gridView;
-// 角标题
-- (void)gridView:(ExcelGridView *)girdView titleOfCornerLabel:(UILabel *)label;
 
 #pragma mark - 横向标题设置的代理方法
 
@@ -57,7 +48,6 @@ typedef NS_ENUM(NSUInteger, ExcelGridHorizontalHeaderType) {
 - (UITableViewCell *)gridView:(ExcelGridView *)gridView titleCellOfVerticalHeaderAtIndexPath:(NSIndexPath *)indexPath;
 
 
-
 #pragma mark - 设置内容区
 
 // 内容的区的item，使用与CollectionView
@@ -69,15 +59,10 @@ typedef NS_ENUM(NSUInteger, ExcelGridHorizontalHeaderType) {
 - (UITableViewCell *)gridView:(ExcelGridView *)gridView contentCellAtIndexPath:(NSIndexPath *)indexPath;
 
 
-
 #pragma mark - 内容区、标题区都用得到的代理方法
 
 // 有多少列
 - (NSInteger)numberOfLinesInGridView:(ExcelGridView *)gridView;
-// 有多少分组
-- (NSInteger)numberOfSectionsInGridView:(ExcelGridView *)gridView;
-// 内容区、左侧纵向标题区有多少行
-- (NSInteger)gridView:(ExcelGridView *)gridView numberOfRowsInSection:(NSInteger)section;
 // 内容区、左侧纵向标题区某一行的高度
 - (CGFloat)gridView:(ExcelGridView *)gridView heightForRow:(NSInteger)row inSection:(NSInteger)section;
 // 内容区、左侧纵向标题区的header的高度
@@ -85,26 +70,25 @@ typedef NS_ENUM(NSUInteger, ExcelGridHorizontalHeaderType) {
 // 内容区有多少列，同样适用于横向的标题
 - (CGFloat)gridView:(ExcelGridView *)gridView widthForLineWithIndex:(NSInteger)lineIndex;
 
+@required
+// 有多少分组
+- (NSInteger)numberOfSectionsInGridView:(ExcelGridView *)gridView;
+// 内容区、左侧纵向标题区有多少行
+- (NSInteger)gridView:(ExcelGridView *)gridView numberOfRowsInSection:(NSInteger)section;
 
 @end
 
-
 @interface ExcelGridView : ExcelGridFrame
 
-- (instancetype)initWithFrame:(CGRect)frame
-                   visualType:(ExcelGridVisualType)visualType
-                     delegate:(id <ExcelGridViewDelegate>)delegate;
+@property (assign, nonatomic) ExcelGridVisualType gridVisualType;
+@property (weak, nonatomic) id <ExcelGridViewDelegate> delegate;
+@property (assign, nonatomic) ExcelGridHorizontalHeaderType horizontalHeaderType;
 
-- (instancetype)initWithVisualType:(ExcelGridVisualType)visualType
-                          delegate:(id <ExcelGridViewDelegate>)delegate;
+@property (assign, nonatomic) NSUInteger numberOfLines;
+@property (assign, nonatomic) CGFloat groupHeaderHeight;
+@property (assign, nonatomic) CGFloat contentItemWidth;
+@property (assign, nonatomic) CGFloat rowHeight;
 
-
-
-@property (nonatomic, weak, readonly) id <ExcelGridViewDelegate> delegate;
-
-@property (nonatomic, assign, readonly) ExcelGridVisualType visualType;
-
-@property (nonatomic, assign, readonly) ExcelGridHorizontalHeaderType horizontalHeaderType;
-
+- (void)reloadData;
 
 @end
