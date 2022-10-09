@@ -67,7 +67,7 @@ UICollectionViewDelegateFlowLayout
     _rowHeight = 44;
     _contentItemWidth = 90;
     _groupHeaderHeight = 0;
-    _numberOfLines = 1;
+    _numberOfColumns = 1;
 }
 
 - (void)reloadData {
@@ -109,7 +109,7 @@ UICollectionViewDelegateFlowLayout
 #pragma mark - horizontal header custom view sources
 
 - (void)setupHorizontalHeaderViews {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(numberOfLinesInGridView:)]) {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(numberOfColumnsInGridView:)]) {
         [self.grid_horizontalHeaderScrollView grid_removeAllSubViews];
         
         if ([self.delegate respondsToSelector:@selector(gridView:viewForHorizontalHeaderAtIndex:)]) {
@@ -117,7 +117,7 @@ UICollectionViewDelegateFlowLayout
             
             self.grid_horizontalHeaderScrollView.contentSize = CGSizeMake(self.contentWidth, self.horizontalHeaderHeight);
             
-            for (NSInteger i = 0; i < [self.delegate numberOfLinesInGridView:self]; i ++) {
+            for (NSInteger i = 0; i < [self.delegate numberOfColumnsInGridView:self]; i ++) {
                 UIView *view = [self.delegate gridView:self viewForHorizontalHeaderAtIndex:i];
                 if (view) {
                     CGFloat width = self.contentItemWidth;
@@ -230,10 +230,10 @@ UICollectionViewDelegateFlowLayout
 // 每个分组有多少的item
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     NSInteger rows = 0;
-    NSInteger lines = self.numberOfLines;
+    NSInteger lines = self.numberOfColumns;
     if (self.delegate) {
-        if ([self.delegate respondsToSelector:@selector(numberOfLinesInGridView:)]) {
-            lines = [self.delegate numberOfLinesInGridView:self];
+        if ([self.delegate respondsToSelector:@selector(numberOfColumnsInGridView:)]) {
+            lines = [self.delegate numberOfColumnsInGridView:self];
         }
         
         // 如果是横向标题的collection，则直接返回
@@ -297,7 +297,7 @@ UICollectionViewDelegateFlowLayout
     
     CGFloat width = self.contentItemWidth;
     CGFloat height = self.rowHeight;
-    NSInteger lineCount = self.numberOfLines;
+    NSInteger lineCount = self.numberOfColumns;
     
     if (self.delegate) {
         // 获取内容区的列宽
@@ -311,8 +311,8 @@ UICollectionViewDelegateFlowLayout
         }
         
         // 获取内容区的列数
-        if ([self.delegate respondsToSelector:@selector(numberOfLinesInGridView:)]) {
-            lineCount = [self.delegate numberOfLinesInGridView:self] ?: 1;
+        if ([self.delegate respondsToSelector:@selector(numberOfColumnsInGridView:)]) {
+            lineCount = [self.delegate numberOfColumnsInGridView:self] ?: 1;
         }
         
         // 获取每行内容的高度

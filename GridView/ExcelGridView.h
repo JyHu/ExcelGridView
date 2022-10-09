@@ -58,13 +58,24 @@ typedef NS_ENUM(NSUInteger, ExcelGridHorizontalHeaderType) {
 #pragma mark - 内容区、标题区都用得到的代理方法
 
 // 有多少列
-- (NSInteger)numberOfLinesInGridView:(ExcelGridView *)gridView;
+- (NSInteger)numberOfColumnsInGridView:(ExcelGridView *)gridView;
 // 内容区、左侧纵向标题区某一行的高度
 - (CGFloat)gridView:(ExcelGridView *)gridView heightForRow:(NSInteger)row inSection:(NSInteger)section;
 // 内容区、左侧纵向标题区的header的高度
 - (CGFloat)gridView:(ExcelGridView *)gridView heightForHeaderInSection:(NSInteger)section;
 // 内容区有多少列，同样适用于横向的标题
 - (CGFloat)gridView:(ExcelGridView *)gridView widthForLineWithIndex:(NSInteger)lineIndex;
+
+#pragma mark - 点击事件
+
+- (void)gridView:(ExcelGridView *)gridView selectedRow:(NSInteger)row inSection:(NSInteger)section;
+- (void)gridView:(ExcelGridView *)gridView selectedVertcalHeaderAtIndexPath:(NSIndexPath *)indexPath;
+- (void)gridView:(ExcelGridView *)gridView selectedContentItemAtIndexPath:(NSIndexPath *)indexPath;
+- (void)gridView:(ExcelGridView *)gridView selectedHoriHeaderAtIndex:(NSInteger)index;
+- (void)gridView:(ExcelGridView *)gridView selectedContentCellAtIndexPath:(NSIndexPath *)indexPath;
+- (void)gridView:(ExcelGridView *)gridView selectedLineWithIndex:(NSInteger)index;
+
+#pragma mark - required
 
 @required
 // 有多少分组
@@ -91,7 +102,7 @@ typedef NS_ENUM(NSUInteger, ExcelGridHorizontalHeaderType) {
  */
 @property (assign, nonatomic) ExcelGridHorizontalHeaderType horizontalHeaderType;
 
-@property (assign, nonatomic) NSUInteger numberOfLines;     // 有多少列
+@property (assign, nonatomic) NSUInteger numberOfColumns;     // 有多少列
 @property (assign, nonatomic) CGFloat groupHeaderHeight;    // 横标题的高度
 @property (assign, nonatomic) CGFloat contentItemWidth;     // 内容区每个item的宽度
 @property (assign, nonatomic) CGFloat rowHeight;            // 每一行的高度

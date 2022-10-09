@@ -70,7 +70,7 @@
         _gridView.horizontalHeaderHeight = 45;
         _gridView.verticalHeaderWidth = 120;
         _gridView.contentWidth = 900;
-        _gridView.numberOfLines = 10;
+        _gridView.numberOfColumns = 10;
         _gridView.rowHeight = 44;
         _gridView.contentItemWidth = 90;
         _gridView.groupHeaderHeight = 10;
